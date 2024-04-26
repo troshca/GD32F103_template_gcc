@@ -21,9 +21,9 @@ OPT = -Os
 GCC_PATH ?= C:/"Program Files (x86)"/"GNU Arm Embedded Toolchain"/"10 2021.10"/bin
 BUILD_DIR = build
 SDK_ROOT = C:/Users/user/Documents/Code/GD32F10x_Firmware_Library_V2.3.0/
-#segger_rtt = segger_rtt/
-SRC_DIR = src/
-INC_DIR = inc/
+segger_rtt = segger_rtt/
+SRC_DIR = Src/
+INC_DIR = Inc/
 
 ######################################
 # source
@@ -55,6 +55,9 @@ $(SDK_ROOT)Firmware/GD32F10x_standard_peripheral/Source/gd32f10x_i2c.c \
 $(SDK_ROOT)Firmware/GD32F10x_standard_peripheral/Source/gd32f10x_rtc.c \
 $(SDK_ROOT)Firmware/GD32F10x_standard_peripheral/Source/gd32f10x_sdio.c \
 $(SDK_ROOT)Firmware/GD32F10x_standard_peripheral/Source/gd32f10x_crc.c \
+$(segger_rtt)SEGGER_RTT.c \
+$(segger_rtt)SEGGER_RTT_Syscalls_GCC.c \
+$(segger_rtt)SEGGER_RTT_printf.c \
 $(SRC_DIR)systick.c \
 $(SRC_DIR)Src/gd32f10x_it.c \
 $(SRC_DIR)Src/main.c 
@@ -68,6 +71,7 @@ C_INCLUDES =  \
 -I$(SDK_ROOT)/Firmware/CMSIS/GD/GD32F10x/Include \
 -I$(SDK_ROOT)/Firmware/GD32F10x_standard_peripheral/Include \
 -I$(SDK_ROOT)/Template \
+-I$(segger_rtt) \
 -I$(INC_DIR)User
 
 # ASM sources
@@ -207,7 +211,7 @@ erase:
 # clean up
 #######################################
 clean:
-	-rm -fR $(BUILD_DIR)
+	-del $(BUILD_DIR)
 
 #######################################
 # dependencies
